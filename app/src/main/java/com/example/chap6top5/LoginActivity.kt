@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"Logging In", Toast.LENGTH_SHORT).show()
             signInGoogle()
 
+
         }
 
 
@@ -61,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
         if(requestCode==Req_Code){
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleResult(task)
-//            firebaseAuthWithGoogle(account!!)
         }
     }
     private fun handleResult(completedTask: Task<GoogleSignInAccount>){
@@ -76,12 +76,11 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun UpdateUI(account: GoogleSignInAccount){
         val credential= GoogleAuthProvider.getCredential(account.idToken,null)
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {task->
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
 
-//                SavedPreference.setEmail(this,account.email.toString())
-//                SavedPreference.setUsername(this,account.displayName.toString())
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
 
         }
     }
@@ -93,6 +92,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(GoogleSignIn.getLastSignedInAccount(this)!=null){
+            startActivity(Intent(this, MainActivity::class.java))
+
+        }
+    }
 
 
 }
