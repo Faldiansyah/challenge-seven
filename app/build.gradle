@@ -24,17 +24,17 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-//    flavorDimensions("datamahasiswa")
-//    productFlavors{
-//        userfree{
-//            applicationIdSuffix ".userfree"
-//            dimension "datamahasiswa"
-//        }
-//        userpaid{
-//            applicationIdSuffix ".userpaid"
-//            dimension "datamahasiswa"
-//        }
-//    }
+    flavorDimensions("datamahasiswa")
+    productFlavors{
+        userfree{
+            applicationIdSuffix ".userfree"
+            dimension "datamahasiswa"
+        }
+        userpaid{
+            applicationIdSuffix ".userpaid"
+            dimension "datamahasiswa"
+        }
+    }
 
     buildTypes {
         release {
