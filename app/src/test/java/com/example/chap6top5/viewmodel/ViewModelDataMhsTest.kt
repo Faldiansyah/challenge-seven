@@ -123,19 +123,22 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, resDeleteBm)
     }
-//    @Test
-//    fun testEditData(){
-//        val id = 0
-//        val resEdit = mockk <Call<ResponseDataMhsItem>>()
-//        every {
-//            servis.editDataMhs(id,DataMahasiswa("dapin","20SI1212","jakarta","null","laki laki"))
-//        }returns resEdit
-//
-//        val result = servis.editDataMhs(id,DataMahasiswa("dapin","20SI1212","jakarta","null","laki laki"))
-//        verify {
-//            servis.editDataMhs(id,DataMahasiswa("dapin","20SI1212","jakarta","null","laki laki"))
-//        }
-//        assertEquals(result, resEdit)
-//    }
+    @Test
+    fun testGetDataById(){
+        val id = 0
+        val resGetDataById = mockk <Call<ResponseDataMhsItem>>()
+        every {
+            servis.getDataByid(id)
+
+        }returns resGetDataById
+
+        //        System Under Test (WHEN)
+        val result = servis.getDataByid(id)
+
+        verify {
+            runBlocking { servis.getDataByid(id) }
+        }
+        Assert.assertEquals(result, resGetDataById)
+    }
 
 }
