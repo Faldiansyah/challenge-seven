@@ -38,33 +38,38 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
     fun getDataMhs(): MutableLiveData<List<ResponseDataMhsItem>?> {
         return liveDataMhs
     }
+
     fun getDataMhs(id : Int): MutableLiveData<ResponseDataMhsItem?> {
         return ldMhsById
     }
+
     fun postDataMhs(): MutableLiveData<ResponseDataMhs?> {
         return postLdDataMhs
     }
+
     fun editDataMhs(): MutableLiveData<ResponseDataMhsItem?> {
         return editLdDataMhs
     }
+
     fun getLdDelDataMhs(): MutableLiveData<ResponseDataMhsItem?> {
         return deleteLdDataMhs
     }
+
     fun getBookmarkDataMhs(): MutableLiveData<List<ResponseBookmarkItem>> {
         return liveDataBookmark
     }
+
     fun postDataBookmark(): MutableLiveData<ResponseBookmark> {
         return postBookmark
     }
+
     fun getBookmarkById(id : Int): MutableLiveData<ResponseBookmarkItem> {
         return ldBookmarkById
     }
+
     fun getDelBookmark(): MutableLiveData<ResponseBookmarkItem> {
         return deleteLdBookmark
     }
-
-
-
 
     fun callDeleteData(id : Int){
         api.deleteDataMhs(id)
@@ -86,6 +91,7 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
 
             })
     }
+
     fun callDeleteBookmark(id: Int){
         api.deleteBookmark(id)
             .enqueue(object : Callback<ResponseBookmarkItem> {
@@ -124,9 +130,7 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
                 override fun onFailure(call: Call<ResponseDataMhsItem>, t: Throwable) {
                     editLdDataMhs.postValue(null)
                 }
-
             })
-
     }
 
     fun callPostApiDataMhs(nama : String, nim : String, jk : String, alamat : String, foto : String){
@@ -149,6 +153,7 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
 
             })
     }
+
     fun callAddBookmark(nama : String, nim : String, jk : String, alamat : String, foto : String){
         api.addBookmarkDataMhs(DataMahasiswa(nama,nim,jk,alamat,foto))
             .enqueue(object : Callback<ResponseBookmark> {
@@ -166,10 +171,8 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
                 override fun onFailure(call: Call<ResponseBookmark>, t: Throwable) {
                     postBookmark.postValue(null)
                 }
-
             })
     }
-
 
     fun callGetDataMhs(id : Int){
         api.getDataByid(id)
@@ -188,9 +191,9 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
                 override fun onFailure(call: Call<ResponseDataMhsItem>, t: Throwable) {
                     ldMhsById.postValue(null)
                 }
-
             })
     }
+
     fun callGetBookmark(id: Int){
         api.getBookmarkByid(id)
             .enqueue(object : Callback<ResponseBookmarkItem> {
@@ -232,6 +235,7 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
 
             })
     }
+
     fun callBookmarkDataMhs(){
         api.getBookmarkMhs()
             .enqueue(object : Callback<List<ResponseBookmarkItem>> {
@@ -252,8 +256,4 @@ class ViewModelDataMhs @Inject constructor(var api : APIInterface) : ViewModel()
 
             })
     }
-
-
-
-
 }

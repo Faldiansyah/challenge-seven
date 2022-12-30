@@ -15,11 +15,12 @@ class SplashActivity : AppCompatActivity() {
     lateinit var binding : ActivitySplashBinding
     lateinit var dataLogin : DataStoreLogin
     lateinit var usernama : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        throw RuntimeException("Test Crash")
 
         dataLogin = DataStoreLogin(this)
 
@@ -35,13 +36,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
-
-
         },3000)
-
-
-
-
     }
-
 }

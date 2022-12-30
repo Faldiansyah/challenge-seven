@@ -16,9 +16,12 @@ import kotlin.properties.Delegates
 class EditDataActivity : AppCompatActivity() {
     lateinit var binding : ActivityEditDataBinding
     lateinit var viewModel : ViewModelDataMhs
+
     var id by Delegates.notNull<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityEditDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +38,7 @@ class EditDataActivity : AppCompatActivity() {
         }
 
     }
+
     fun setDataToInput(){
         viewModel.callGetDataMhs(id)
         viewModel.getDataMhs(id).observe(this,{
@@ -46,6 +50,7 @@ class EditDataActivity : AppCompatActivity() {
         })
 
     }
+
     fun editData(){
         var nama = binding.editNama.text.toString()
         var nim = binding.editNim.text.toString()

@@ -1,8 +1,6 @@
 package com.example.chap6top5.viewmodel
 
-import com.example.chap6top5.model.DataMahasiswa
 import com.example.chap6top5.model.ResponseBookmarkItem
-import com.example.chap6top5.model.ResponseDataMhs
 import com.example.chap6top5.model.ResponseDataMhsItem
 import com.example.chap6top5.network.APIInterface
 import io.mockk.every
@@ -41,6 +39,7 @@ class ViewModelDataMhsTest{
         }
         assertEquals(result, respAllDataMhs)
     }
+
     @Test
     fun testGetDataMhs(){
         val respAllDataMhs = mockk <Call<List<ResponseDataMhsItem>>>()
@@ -57,6 +56,7 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, respAllDataMhs)
     }
+
     @Test
     fun testGetBookmark(){
         val respBookmark = mockk <Call<List<ResponseBookmarkItem>>>()
@@ -73,6 +73,7 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, respBookmark)
     }
+
     @Test
     fun testBookmark(){
         val respBookmark = mockk <Call<List<ResponseBookmarkItem>>>()
@@ -89,6 +90,7 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, respBookmark)
     }
+
     @Test
     fun testDeleteData(){
         val id = 0
@@ -106,6 +108,7 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, resDelete)
     }
+
     @Test
     fun testDeleteBookmark(){
         val id = 0
@@ -123,6 +126,7 @@ class ViewModelDataMhsTest{
         }
         Assert.assertEquals(result, resDeleteBm)
     }
+
     @Test
     fun testGetDataById(){
         val id = 0

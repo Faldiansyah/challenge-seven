@@ -15,7 +15,9 @@ import kotlin.properties.Delegates
 class DetailActivity : AppCompatActivity() {
     lateinit var binding : ActivityDetailBinding
     lateinit var viewModel : ViewModelDataMhs
+
     var id by Delegates.notNull<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -24,10 +26,8 @@ class DetailActivity : AppCompatActivity() {
         id = intent.getStringExtra("id")!!.toInt()
         Log.d("DEBUG_ID",id.toString())
         setDetail()
-
-
-
     }
+
     fun setDetail(){
 
         viewModel.callGetDataMhs(id)

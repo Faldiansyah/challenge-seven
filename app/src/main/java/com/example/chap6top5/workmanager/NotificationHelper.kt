@@ -12,11 +12,9 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.chap6top5.R
 import com.example.chap6top5.view.SplashActivity
 
-
 class NotificationHelper(val context : Context) {
     private val CHANNEL_ID = "notif"
     private val NOTIFICATION_ID = 1
-
 
     fun createNotif(tittle : String, message : String){
         createNotifChannel()

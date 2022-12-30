@@ -26,8 +26,10 @@ class LoginActivity : AppCompatActivity() {
     lateinit var dataLogin : DataStoreLogin
     lateinit var useremail : String
     lateinit var userpw : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dataLogin = DataStoreLogin(this)
@@ -38,20 +40,9 @@ class LoginActivity : AppCompatActivity() {
             userpw = it.toString()
         })
 
-
         binding.btnLogin.setOnClickListener {
             val email = binding.inputEmail.text.toString()
             val password = binding.inputLogPw.text.toString()
-//            if(email.isEmpty()){
-//                Toast.makeText(this,"ISI PASSWORD DAN USERNAME ANDA", Toast.LENGTH_SHORT).show()
-//            }else if (password.isEmpty()){
-//                Toast.makeText(this,"ISI PASSWORD DAN USERNAME ANDA", Toast.LENGTH_SHORT).show()
-//            }else if (email == useremail){
-//                startActivity(Intent(this, MainActivity::class.java))
-//                finish()
-//            }else if (password != userpw){
-//                Toast.makeText(this,"ISI PASSWORD DAN USERNAME ANDA", Toast.LENGTH_SHORT).show()
-//            }
             if (email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this,"ISI PASSWORD DAN USERNAME ANDA", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -64,10 +55,8 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this,"USERNAME DAN PASSWORD ANDA SALAH", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-
-
         }
+
         binding.txtRegis.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     lateinit var binding : ActivityMainBinding
     lateinit var dataLogin : DataStoreLogin
     lateinit var viewModel : ViewModelDataMhs
@@ -31,28 +30,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     val Req_Code:Int=123
     private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        FirebaseApp.initializeApp(this)
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//        mGoogleSignInClient= GoogleSignIn.getClient(this,gso)
-//        firebaseAuth= FirebaseAuth.getInstance()
-//
-//
-//        binding.btnlogoutgoogle.setOnClickListener {
-//            mGoogleSignInClient.signOut().addOnCompleteListener {
-//                val intent= Intent(this, LoginActivity::class.java)
-//                Toast.makeText(this,"Logging Out", Toast.LENGTH_SHORT).show()
-//                startActivity(intent)
-//                finish()
-//            }
-//        }
 
         dataLogin = DataStoreLogin(this)
         dataLogin.userName.asLiveData().observe(this,{
@@ -62,20 +45,19 @@ class MainActivity : AppCompatActivity() {
         binding.btnProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
+
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
+
         binding.btnKeBookmark.setOnClickListener {
             startActivity(Intent(this, FavoriteActivity::class.java))
         }
 
         dataMhs()
-
-
-
     }
-    override fun onBackPressed() {
 
+    override fun onBackPressed() {
         AlertDialog.Builder(this)
             .setTitle("Tutup Aplikasi")
             .setMessage("Yakin tutup dari aplikasi?")
@@ -86,11 +68,9 @@ class MainActivity : AppCompatActivity() {
                 dialogInterface.dismiss()
             }
             .show()
-
-
     }
-    fun dataMhs(){
 
+    fun dataMhs(){
         viewModel = ViewModelProvider(this).get(ViewModelDataMhs::class.java)
         viewModel.getDataMhs().observe(this,{
             if (it != null){
@@ -107,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         })
         viewModel.callApiDataMhs()
     }
+
     fun deleteDataMhs(id : Int){
         viewModel.callDeleteData(id)
         viewModel.getLdDelDataMhs().observe(this,{

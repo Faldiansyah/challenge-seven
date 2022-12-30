@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.chap6top5.MainActivity
-import com.example.chap6top5.R
 import com.example.chap6top5.databinding.ActivityBookmarkBinding
 import com.example.chap6top5.viewmodel.ViewModelDataMhs
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,10 +46,6 @@ class BookmarkActivity : AppCompatActivity() {
             binding.bmNama.setText(it!!.nama)
             binding.bmNim.setText(it!!.nim)
             binding.bmJk.setText(it!!.jk)
-
-//            var url = it.foto
-//            Glide.with(this).load(url).circleCrop().into(binding.imgDetail)
-
             binding.bmAlamat.setText(it.alamat)
             binding.bmFoto.setText(it.foto)
 

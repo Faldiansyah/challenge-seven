@@ -46,16 +46,14 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     val Req_Code:Int=123
     private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-//        firebaseAuth= FirebaseAuth.getInstance()
         binding.akunGoogle.setOnClickListener{ view: View? ->
-//            binding.akunGoogle.setText("terhubung ke akun google")
             FirebaseApp.initializeApp(this)
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -65,10 +63,9 @@ class ProfileActivity : AppCompatActivity() {
             firebaseAuth= FirebaseAuth.getInstance()
             Toast.makeText(this,"Logging In", Toast.LENGTH_SHORT).show()
             signInGoogle()
-
         }
-        logoutGoogle()
 
+        logoutGoogle()
 
         dataLogin = DataStoreLogin(this)
         dataProfile = DataStoreProfile(this)
@@ -76,15 +73,19 @@ class ProfileActivity : AppCompatActivity() {
         dataLogin.userName.asLiveData().observe(this,{
             binding.profileUser.setText(it.toString())
         })
+
         dataProfile.userNama.asLiveData().observe(this,{
             binding.inputNama.setText(it.toString())
         })
+
         dataProfile.userTgl.asLiveData().observe(this,{
             binding.inputTgl.setText(it.toString())
         })
+
         dataProfile.userAlamat.asLiveData().observe(this,{
             binding.inputAlamat.setText(it.toString())
         })
+
         var image = BitmapFactory.decodeFile(this.applicationContext.filesDir.path + File.separator +"dataFoto"+ File.separator +"fotoProfile.png")
         binding.btnAddProfile.setImageBitmap(image)
 
@@ -93,7 +94,6 @@ class ProfileActivity : AppCompatActivity() {
             val updateTgl = binding.inputTgl.text.toString()
             val updateAlamat = binding.inputAlamat.text.toString()
             val updateGambar = binding.btnAddProfile.drawable.toString()
-//            val updateUsername = binding.profileUser.text.toString()
 
             GlobalScope.launch {
                 dataProfile.saveDataProfile(updateNama,updateTgl,updateAlamat)
@@ -114,11 +114,13 @@ class ProfileActivity : AppCompatActivity() {
                 finish()
             }
         }
+
         binding.btnAddProfile.setOnClickListener {
             checkingPermissions()
         }
 
     }
+
     fun logoutGoogle(){
         FirebaseApp.initializeApp(this)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -127,7 +129,6 @@ class ProfileActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient= GoogleSignIn.getClient(this,gso)
         firebaseAuth= FirebaseAuth.getInstance()
-
 
         binding.logoutGoogle.setOnClickListener {
             mGoogleSignInClient.signOut().addOnCompleteListener {
@@ -138,22 +139,20 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
     private  fun signInGoogle(){
-
-
         val signInIntent: Intent =mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent,Req_Code)
-
-
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==Req_Code){
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleResult(task)
-
         }
     }
+
     private fun handleResult(completedTask: Task<GoogleSignInAccount>){
         try {
             val account: GoogleSignInAccount? =completedTask.getResult(ApiException::class.java)
@@ -164,33 +163,31 @@ class ProfileActivity : AppCompatActivity() {
             Toast.makeText(this,e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun UpdateUI(account: GoogleSignInAccount){
         val credential= GoogleAuthProvider.getCredential(account.idToken,null)
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
             startActivity(Intent(this, ProfileActivity::class.java))
             Log.e("sigingoogle",signInGoogle().toString())
-
-
-
         }
     }
+
     override fun onResume() {
         super.onResume()
         if(GoogleSignIn.getLastSignedInAccount(this)!=null){
             Toast.makeText(this,"berhasil menghubungkan ke google", Toast.LENGTH_SHORT).show()
             binding.akunGoogle.text = "terhubung ke akun google"
             binding.logoutGoogle.text= "logout?"
-
         }
     }
+
     fun writeBitmapToFile(applicationContext: Context, bitmap: Bitmap): Uri {
         val name = "fotoProfile.png"
         val outputDir = File(applicationContext.filesDir, "dataFoto")
         if (!outputDir.exists()) {
             outputDir.mkdirs() // should succeed
         }
+
         val outputFile = File(outputDir, name)
         var out: FileOutputStream? = null
         try {
@@ -208,8 +205,6 @@ class ProfileActivity : AppCompatActivity() {
         return Uri.fromFile(outputFile)
     }
 
-
-
     private fun checkingPermissions() {
         if (isGranted(
                 this,
@@ -225,6 +220,7 @@ class ProfileActivity : AppCompatActivity() {
             chooseImageDialog()
         }
     }
+
     private fun isGranted(
         activity: Activity,
         permission: String,
@@ -243,6 +239,7 @@ class ProfileActivity : AppCompatActivity() {
             true
         }
     }
+
     private fun showPermissionDeniedDialog() {
         AlertDialog.Builder(this)
             .setTitle("Permission Denied")
@@ -259,6 +256,7 @@ class ProfileActivity : AppCompatActivity() {
             .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
             .show()
     }
+
     private fun chooseImageDialog() {
         AlertDialog.Builder(this)
             .setMessage("Pilih Gambar")
@@ -266,28 +264,32 @@ class ProfileActivity : AppCompatActivity() {
             .setNegativeButton("Camera") { _, _ -> openCamera() }
             .show()
     }
+
     private fun openGallery() {
         intent.type = "image/*"
         galleryResult.launch("image/*")
     }
+
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraResult.launch(cameraIntent)
     }
+
     private fun handleCameraImage(intent: Intent?) {
         val bitmap = intent?.extras?.get("data") as Bitmap
         binding.btnAddProfile.setImageBitmap(bitmap)
     }
+
     private val cameraResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 handleCameraImage(result.data)
             }
         }
+
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             imageUri = result
             binding.btnAddProfile.setImageURI(result)
         }
-
 }

@@ -11,9 +11,7 @@ import com.example.chap6top5.model.ResponseDataMhsItem
 class MhsAdapter(var listData : List<ResponseDataMhsItem>): RecyclerView.Adapter<MhsAdapter.ViewHolder>() {
     var onDeleteClick : ((ResponseDataMhsItem)-> Unit)? = null
 
-    class ViewHolder(var binding : ItemBinding): RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class ViewHolder(var binding : ItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var view= ItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -39,6 +37,7 @@ class MhsAdapter(var listData : List<ResponseDataMhsItem>): RecyclerView.Adapter
             edit.putExtra("id",listData[position].id)
             it.context.startActivity(edit)
         }
+
         holder.binding.imgBm.setOnClickListener {
             var bm = Intent(it.context, BookmarkActivity::class.java)
             bm.putExtra("id",listData[position].id)
@@ -48,7 +47,6 @@ class MhsAdapter(var listData : List<ResponseDataMhsItem>): RecyclerView.Adapter
         holder.binding.imgDelete.setOnClickListener {
             onDeleteClick?.invoke(listData[position])
         }
-
     }
 
     override fun getItemCount(): Int {

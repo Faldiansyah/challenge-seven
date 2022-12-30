@@ -40,6 +40,8 @@
         <entry key="..\:/Farrel/kotlin/Chap6Top5/app/src/userpaid/res/layout/activity_register.xml" value="0.26666666666666666" />
         <entry key="..\:/Farrel/kotlin/Chap6Top5/app/src/userpaid/res/layout/activity_splash.xml" value="0.3111111111111111" />
         <entry key="..\:/Farrel/kotlin/Chap6Top5/app/src/userpaid/res/layout/item.xml" value="0.3111111111111111" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.19427083333333334" />
+        <entry key="app/src/userfree/res/layout/activity_login.xml" value="0.19427083333333334" />
       </map>
     </option>
   </component>

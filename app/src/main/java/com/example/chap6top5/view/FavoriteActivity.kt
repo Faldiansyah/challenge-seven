@@ -15,16 +15,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
     lateinit var viewModel : ViewModelDataMhs
     lateinit var binding : ActivityFavoriteBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dataBookmark()
-
-
     }
-    fun dataBookmark(){
 
+    fun dataBookmark(){
         viewModel = ViewModelProvider(this).get(ViewModelDataMhs::class.java)
         viewModel.getBookmarkDataMhs().observe(this,{
             if (it != null){
@@ -41,6 +41,7 @@ class FavoriteActivity : AppCompatActivity() {
         })
         viewModel.callBookmarkDataMhs()
     }
+
     fun deleteBookmarl(id : Int){
         viewModel.callDeleteBookmark(id)
         viewModel.getDelBookmark().observe(this,{

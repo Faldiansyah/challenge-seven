@@ -18,8 +18,6 @@ class DataStoreProfile(private val context: Context) {
     val TGL = stringPreferencesKey("tgl")
     val ALAMAT = stringPreferencesKey("alamat")
 
-
-
     suspend fun saveDataProfile(nama : String, tgl : String, alamat: String){
         context.dataStore.edit {
             it[NAMA] = nama
@@ -28,18 +26,22 @@ class DataStoreProfile(private val context: Context) {
         }
 
     }
+
     val userNama: Flow<String> = context.dataStore.data
         .map {
             it[NAMA] ?: ""
         }
+
     val userTgl: Flow<String> = context.dataStore.data
         .map {
             it[TGL] ?: ""
         }
+
     val userAlamat: Flow<String> = context.dataStore.data
         .map {
             it[ALAMAT] ?: ""
         }
+
     suspend fun clearDataProfile(){
         context.dataStore.edit {
             it.clear()
